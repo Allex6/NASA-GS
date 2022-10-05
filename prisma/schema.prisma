@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model APODImages {
+  id        Int      @id @default(autoincrement())
+  photoDate DateTime @db.Timestamp(6)
+  url       String   @unique
+  views     Int
+}
+
+model MarsImages {
+  id        Int      @id @default(autoincrement())
+  photoDate DateTime @db.Timestamp(6)
+  url       String   @unique
+  views     Int
+  rover     rovers
+  camera    cameras
+}
+
+model NASAGallery {
+  id        Int        @id @default(autoincrement())
+  photoDate DateTime   @db.Timestamp(6)
+  url       String     @unique
+  views     Int
+  mediaType mediaTypes
+}
+
+model users {
+  id          Int           @id @default(autoincrement())
+  name        String
+  birthDate   DateTime      @db.Timestamp(6)
+  email       String        @unique
+  password    String
+  createdAt   DateTime?     @default(dbgenerated("'2022-10-01 09:08:48.020477'::timestamp without time zone")) @db.Timestamp(6)
+  usersImages usersImages[]
+}
+
+model usersImages {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  photoDate DateTime @db.Timestamp(6)
+  url       String   @unique
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+enum cameras {
+  Front_Hazard_Avoidance_Camera                      @map("Front Hazard Avoidance Camera")
+  Rear_Hazard_Avoidance_Camera                       @map("Rear Hazard Avoidance Camera")
+  Mast_Camera                                        @map("Mast Camera")
+  Chemistry_and_Camera_Complex                       @map("Chemistry and Camera Complex")
+  Mars_Hand_Lens_Imager                              @map("Mars Hand Lens Imager")
+  Mars_Descent_Imager                                @map("Mars Descent Imager")
+  Navigation_Camera                                  @map("Navigation Camera")
+  Panoramic_Camera                                   @map("Panoramic Camera")
+  Miniature_Thermal_Emission_Spectrometer__Mini_TES_ @map("Miniature Thermal Emission Spectrometer (Mini-TES)")
+}
+
+enum mediaTypes {
+  image
+  video
+}
+
+enum rovers {
+  Curiosity
+  Opportunity
+  Spirit
+}
