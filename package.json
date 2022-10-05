@@ -1,0 +1,51 @@
+{
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/jest": "^29.1.1",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/pg": "^8.6.5",
+    "@types/supertest": "^2.0.12",
+    "bcrypt": "^5.0.1",
+    "jest": "^29.1.2",
+    "prisma": "^4.4.0",
+    "supertest": "^6.2.4",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.4.0",
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.5",
+    "dotenv": "^16.0.3",
+    "dotenv-cli": "^6.0.0",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.6.2",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.8.0"
+  },
+  "name": "nasa-gs-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "migrate:dev": "dotenv -e .env.test npx prisma migrate dev",
+    "migrate:deploy": "npx prisma migrate deploy",
+    "test": "npm run migrate:dev && dotenv -e .env.test jest --no-cache -i",
+    "test:unit": "npm run migrate:dev && dotenv -e .env.test jest /unit/* --no-cache -i",
+    "test:integration": "npm run migrate:dev && dotenv -e .env.test jest /integration/* --no-cache -i",
+    "dev": "nodemon server.ts",
+    "start": "node ./dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
