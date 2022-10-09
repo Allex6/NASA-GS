@@ -42,7 +42,8 @@
     "test:unit": "npm run migrate:dev && dotenv -e .env.test jest /unit/* --no-cache -i",
     "test:integration": "npm run migrate:dev && dotenv -e .env.test jest /integration/* --no-cache -i",
     "dev": "nodemon server.ts",
-    "start": "node ./dist/server.js"
+    "build": "tsc",
+    "start": "npm run build && node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
