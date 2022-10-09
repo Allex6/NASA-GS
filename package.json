@@ -43,7 +43,7 @@
     "test:integration": "npm run migrate:dev && dotenv -e .env.test jest /integration/* --no-cache -i",
     "dev": "nodemon server.ts",
     "build": "tsc",
-    "start": "npm run build && node ./dist/server.js"
+    "start": "prisma migrate deploy && node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
